@@ -18,6 +18,7 @@ public class UI extends JFrame {
 	
 	private JPanel contentPane;
 	public JPanelOpciones jPanelOpciones;
+	public Botonera botonera;
 
 	
 	/**
@@ -33,6 +34,9 @@ public class UI extends JFrame {
 		
 		jPanelOpciones=new JPanelOpciones();
 		contentPane.add(jPanelOpciones, BorderLayout.SOUTH);
+		
+		
+		
 	}
 
 	public void tomaValores(Densidad densidad, Dificultad dificultad) {
@@ -50,6 +54,12 @@ public class UI extends JFrame {
 
 	public JComboBox getCmbDensidad() {
 		return jPanelOpciones.getCmbDensidad();
+	}
+	public void addBotonera(int dificultad) {
+		botonera= new Botonera(dificultad);
+		
+		contentPane.add(botonera,BorderLayout.CENTER);
+		this.repaint();
 	}
 
 }
