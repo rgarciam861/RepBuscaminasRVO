@@ -59,7 +59,7 @@ public class UI extends JFrame {
 		botonera= new Botonera(dificultad);
 		
 		contentPane.add(botonera,BorderLayout.CENTER);
-		this.repaint();
+		setContentPane(contentPane);
 	}
 
 }
