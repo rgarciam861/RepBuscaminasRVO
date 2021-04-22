@@ -1,17 +1,18 @@
 package modelo;
 
 public class Coordenada {
-	private int posX,posY;
+	private int posX, posY;
 
 	public Coordenada(int posX, int posY) {
 		super();
 		this.posX = posX;
 		this.posY = posY;
 	}
-	
-	public Coordenada (int coordenadas[]) {
+
+	public Coordenada(int coordenadas[]) {
 		this(coordenadas[0], coordenadas[1]);
 	}
+
 	public int getPosX() {
 		return posX;
 	}
@@ -52,6 +53,5 @@ public class Coordenada {
 			return false;
 		return true;
 	}
-	
 
 }

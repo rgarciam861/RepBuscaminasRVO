@@ -1,7 +1,5 @@
 package modelo;
 
-import utiles.Utiles;
-
 public class Tablero {
 	// Aqui se guarda la logica del juego que afacta a la rejilla
 	private Casilla[][] casillas;

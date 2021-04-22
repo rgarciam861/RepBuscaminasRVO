@@ -8,15 +8,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import modelo.Coordenada;
-import modelo.Densidad;
 import modelo.Dificultad;
-import modelo.Tablero;
 import modelo.TableroAleatorio;
 import vista.Botonera;
-import javax.swing.JTextField;
 
 public class EnsayoBotonera extends JFrame {
 
@@ -25,9 +23,6 @@ public class EnsayoBotonera extends JFrame {
 	private TableroAleatorio tablero = new TableroAleatorio(Dificultad.medio.getLongitud(), 5);
 	private Botonera botonera;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
