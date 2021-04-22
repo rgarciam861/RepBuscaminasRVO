@@ -6,39 +6,40 @@ import java.util.Iterator;
 import utiles.Utiles;
 
 public class TableroAleatorio extends Tablero {
-	
-	private int casillasAlrededor=8;
-	//Constructor aleatorio
+
+	private int casillasAlrededor = 8;
+
+	// Constructor aleatorio
 	public TableroAleatorio(int lado, int minas) {
 		super(lado);
 		ArrayList<Coordenada> posiciones = generaAleatorio(minas, lado);
 		disponerTablero(posiciones);
 	}
-	
-	//constructor no aleatorio
-	public TableroAleatorio(int lado,ArrayList<Coordenada> posiciones) {
+
+	// constructor no aleatorio
+	public TableroAleatorio(int lado, ArrayList<Coordenada> posiciones) {
 		super(lado);
 		disponerTablero(posiciones);
 	}
+
 	private void disponerTablero(ArrayList<Coordenada> posiciones) {
 		colocarMinas(posiciones);
 		contarMinasAlrededor(posiciones);
 	}
 
-
 	public void contarMinasAlrededor(ArrayList<Coordenada> posiciones) {
-		
+
 		for (Coordenada coordenada : posiciones) {
 
 			for (int i = 0; i < casillasAlrededor; i++) {
 				int[] posicion = Utiles.damePosicionAlrededor(i);
 				int xAuxiliar = coordenada.getPosX() + posicion[0];
 				int yAuxiliar = coordenada.getPosY() + posicion[1];
-				if (xAuxiliar >= 0 && yAuxiliar >= 0 && xAuxiliar <= getAlto() && yAuxiliar <= getAncho()) {
+				if (isIntoLimits(xAuxiliar, yAuxiliar)) {
 //					System.out.println("X " +xAuxiliar+ "Y " +yAuxiliar);
 					Casilla casilla = getCasilla(new Coordenada(xAuxiliar, yAuxiliar));
 					if (!casilla.isMina()) {
-						
+
 						casilla.setMinasAlrededor(casilla.getMinasAlrededor() + 1);
 					}
 				}
@@ -46,6 +47,10 @@ public class TableroAleatorio extends Tablero {
 			}
 
 		}
+	}
+
+	private boolean isIntoLimits(int xAuxiliar, int yAuxiliar) {
+		return xAuxiliar >= 0 && yAuxiliar >= 0 && xAuxiliar < getAlto() && yAuxiliar < getAncho();
 	}
 
 	private void colocarMinas(ArrayList<Coordenada> posiciones) {
@@ -88,26 +93,23 @@ public class TableroAleatorio extends Tablero {
 		}
 		return false;
 	}
-	
-	private void desvelarCasilla (Coordenada coordenada) {
-		
+
+	private void desvelarCasilla(Coordenada coordenada) {
+
 		if (getCasilla(coordenada).isVelada()) {
 			getCasilla(coordenada).setVelada(false);
-			
-			if(!getCasilla(coordenada).isMina() || getCasilla(coordenada).getMinasAlrededor()>0) {
+
+			if (!getCasilla(coordenada).isMina() || getCasilla(coordenada).getMinasAlrededor() > 0) {
 				for (int i = 0; i < casillasAlrededor; i++) {
-					int posicionVector[]= Utiles.damePosicionAlrededor(i);
+					int posicionVector[] = Utiles.damePosicionAlrededor(i);
 					Coordenada coordenadaV = new Coordenada(posicionVector);
-					
-					 desvelarCasilla(coordenadaV);
-					
-					}
+
+					desvelarCasilla(coordenadaV);
+
 				}
 			}
-			
 		}
-	
-	
 
+	}
 	
 }
