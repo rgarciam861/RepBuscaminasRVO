@@ -1,8 +1,8 @@
 package modelo;
 
 public enum Dificultad {
-	facil(5),medio(8),dificil(12);
-	
+	facil(5), medio(8), dificil(12);
+
 	private int longitud;
 
 	private Dificultad(int longitud) {
@@ -12,5 +12,5 @@ public enum Dificultad {
 	public int getLongitud() {
 		return longitud;
 	}
-	
+
 }

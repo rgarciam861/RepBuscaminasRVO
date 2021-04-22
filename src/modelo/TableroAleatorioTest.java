@@ -21,10 +21,10 @@ class TableroAleatorioTest {
 		posiciones.add(new Coordenada(2, 2));
 		// minas en {0,0},{1,2},{2,2}
 		TableroAleatorio tableroAleatorio = new TableroAleatorio(4, posiciones);
-		int tablero[][] = { {0,2,1,1}, {1,3,0,2}, {0,2,0,2}, {0,1,1,1} };
+		int tablero[][] = { { 0, 2, 1, 1 }, { 1, 3, 0, 2 }, { 0, 2, 0, 2 }, { 0, 1, 1, 1 } };
 		for (int i = 0; i < tablero.length; i++) {
 			for (int j = 0; j < tablero[0].length; j++) {
-				assertEquals(tablero[i][j],tableroAleatorio.getCasilla(new Coordenada(i, j)).getMinasAlrededor());
+				assertEquals(tablero[i][j], tableroAleatorio.getCasilla(new Coordenada(i, j)).getMinasAlrededor());
 			}
 		}
 

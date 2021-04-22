@@ -5,23 +5,22 @@ public class GestionDatos {
 
 	public GestionDatos() {
 		super();
-		
-		
+
 	}
-	
+
 	public void crearTablero(int densidad, int dificultad) {
-		int cantidadMinas=calcularPorcentaje(densidad, dificultad);
-		
-		
-		tablero= new TableroAleatorio(dificultad, cantidadMinas);
+		int cantidadMinas = calcularPorcentaje(densidad, dificultad);
+
+		tablero = new TableroAleatorio(dificultad, cantidadMinas);
 	}
-	
+
 	public int calcularPorcentaje(int densidad, int dificultad) {
-		int resultado= dificultad*dificultad/densidad;
-		
+		int resultado = dificultad * dificultad / densidad;
+
 		return resultado;
-	
+
 	}
+
 	public Casilla getCasilla(Coordenada coord) {
 		return this.tablero.getCasilla(coord);
 	}

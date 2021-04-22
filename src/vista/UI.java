@@ -1,7 +1,6 @@
 package vista;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -12,18 +11,12 @@ import javax.swing.border.EmptyBorder;
 import modelo.Densidad;
 import modelo.Dificultad;
 
-import javax.swing.JLabel;
-
 public class UI extends JFrame {
 	
 	private JPanel contentPane;
 	public JPanelOpciones jPanelOpciones;
 	public Botonera botonera;
 
-	
-	/**
-	 * Create the frame.
-	 */
 	public UI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -34,9 +27,6 @@ public class UI extends JFrame {
 		
 		jPanelOpciones=new JPanelOpciones();
 		contentPane.add(jPanelOpciones, BorderLayout.SOUTH);
-		
-		
-		
 	}
 
 	public void tomaValores(Densidad densidad, Dificultad dificultad) {
@@ -61,5 +51,4 @@ public class UI extends JFrame {
 		contentPane.add(botonera,BorderLayout.CENTER);
 		setContentPane(contentPane);
 	}
-
 }
