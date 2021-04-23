@@ -1,8 +1,10 @@
 package control;
 
+import modelo.Coordenada;
 import modelo.Densidad;
 import modelo.Dificultad;
 import modelo.GestionDatos;
+import utiles.RespuestaColocacion;
 
 public class Controlador {
 	private GestionDatos gestion;
@@ -17,4 +19,7 @@ public class Controlador {
 		this.gestion.crearTablero(densidad.getPorcentaje(), dificultad.getLongitud());
 	}
 
+	public RespuestaColocacion realizarJugada(Coordenada coordenada) {
+		return this.gestion.realizarJugada(coordenada);
+	}
 }
