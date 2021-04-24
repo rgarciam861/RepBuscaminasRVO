@@ -30,7 +30,9 @@ public class ParaUI extends UI {
 
 				controlador.crearTablero(densidad, dificultad);
 				addBotonera(dificultad.getLongitud());
-				System.out.println();
+				asociarBotones();
+				
+				
 //				
 			}
 		});
@@ -46,7 +48,7 @@ public class ParaUI extends UI {
 						// lo primero es llamar a control para que cambie el estado del tablero
 						JButton boton = (JButton) e.getSource();
 						Coordenada coordenada2 = botonera.getCoordenada(boton);
-//						controlador.realizarJugada(coordenada2);
+						boton.setText(controlador.realizarJugada(coordenada2).getMensaje());
 					}
 				});
 				;
