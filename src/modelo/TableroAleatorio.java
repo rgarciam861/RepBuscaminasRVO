@@ -13,6 +13,8 @@ public class TableroAleatorio extends Tablero {
 		super(lado);
 		ArrayList<Coordenada> posiciones = generaAleatorio(minas, lado);
 		disponerTablero(posiciones);
+		
+		
 	}
 
 	// constructor no aleatorio
@@ -24,6 +26,8 @@ public class TableroAleatorio extends Tablero {
 	private void disponerTablero(ArrayList<Coordenada> posiciones) {
 		colocarMinas(posiciones);
 		contarMinasAlrededor(posiciones);
+		
+		
 	}
 
 	public void contarMinasAlrededor(ArrayList<Coordenada> posiciones) {
@@ -93,7 +97,7 @@ public class TableroAleatorio extends Tablero {
 		return false;
 	}
 
-	private void desvelarCasilla(Coordenada coordenada) {
+	public void desvelarCasilla(Coordenada coordenada) {
 
 		if (getCasilla(coordenada).isVelada()) {
 			getCasilla(coordenada).setVelada(false);

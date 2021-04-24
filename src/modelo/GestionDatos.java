@@ -1,5 +1,7 @@
 package modelo;
 
+import utiles.RespuestaColocacion;
+
 public class GestionDatos {
 	private TableroAleatorio tablero;
 
@@ -12,6 +14,7 @@ public class GestionDatos {
 		int cantidadMinas = calcularPorcentaje(densidad, dificultad);
 
 		tablero = new TableroAleatorio(dificultad, cantidadMinas);
+		
 	}
 
 	public int calcularPorcentaje(int densidad, int dificultad) {
@@ -21,7 +24,13 @@ public class GestionDatos {
 
 	}
 
-	public Casilla getCasilla(Coordenada coord) {
-		return this.tablero.getCasilla(coord);
+	
+	
+	public RespuestaColocacion realizarJugada(Coordenada coordenada) {
+		RespuestaColocacion respuesta= new RespuestaColocacion();
+		
+		
+		int minasAlrededor = this.tablero.getCasilla(coordenada).getMinasAlrededor();
+		return respuesta = new RespuestaColocacion(true, String.valueOf(minasAlrededor));
 	}
 }
