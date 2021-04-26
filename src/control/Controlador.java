@@ -1,5 +1,7 @@
 package control;
 
+import java.util.ArrayList;
+
 import modelo.Coordenada;
 import modelo.Densidad;
 import modelo.Dificultad;
@@ -19,7 +21,11 @@ public class Controlador {
 		this.gestion.crearTablero(densidad.getPorcentaje(), dificultad.getLongitud());
 	}
 
-	public RespuestaColocacion realizarJugada(Coordenada coordenada) {
+	public ArrayList<RespuestaColocacion> realizarJugada(Coordenada coordenada) {
 		return this.gestion.realizarJugada(coordenada);
+	}
+	
+	public RespuestaColocacion isMina(Coordenada coordenada) {
+		return this.gestion.isMina(coordenada);
 	}
 }
