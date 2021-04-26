@@ -18,6 +18,7 @@ public class GestionDatos {
 
 		tablero = new TableroAleatorio(dificultad, cantidadMinas);
 		
+		
 	}
 
 	public int calcularPorcentaje(int densidad, int dificultad) {
@@ -53,5 +54,13 @@ public class GestionDatos {
 		}
 		
 		return arrayRespuestas;
+	}
+
+	public RespuestaColocacion isMina(Coordenada coordenada) {
+		RespuestaColocacion respuesta= new RespuestaColocacion();
+		if (this.tablero.getCasilla(coordenada).isMina()) {
+			 respuesta= new RespuestaColocacion(true, "M");
+		}
+		return respuesta;
 	}
 }
