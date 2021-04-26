@@ -28,13 +28,6 @@ public class GestionDatos {
 
 	}
 	
-	public RespuestaColocacion isMina(Coordenada coordenada) {
-		RespuestaColocacion respuesta= new RespuestaColocacion();
-		if (this.tablero.getCasilla(coordenada).isMina()) {
-			 respuesta= new RespuestaColocacion(true, "M",coordenada);
-		}
-		return respuesta;
-	}
 
 	
 	
