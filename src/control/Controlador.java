@@ -22,4 +22,11 @@ public class Controlador {
 	public RespuestaColocacion realizarJugada(Coordenada coordenada) {
 		return this.gestion.realizarJugada(coordenada);
 	}
+	
+
+	public RespuestaColocacion isMina(Coordenada coordenada) {
+		return this.gestion.isMina(coordenada);
+	}
+	
+	
 }

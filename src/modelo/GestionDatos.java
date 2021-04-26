@@ -15,6 +15,7 @@ public class GestionDatos {
 
 		tablero = new TableroAleatorio(dificultad, cantidadMinas);
 		
+		
 	}
 
 	public int calcularPorcentaje(int densidad, int dificultad) {
@@ -32,5 +33,13 @@ public class GestionDatos {
 		
 		int minasAlrededor = this.tablero.getCasilla(coordenada).getMinasAlrededor();
 		return respuesta = new RespuestaColocacion(true, String.valueOf(minasAlrededor));
+	}
+
+	public RespuestaColocacion isMina(Coordenada coordenada) {
+		RespuestaColocacion respuesta= new RespuestaColocacion();
+		if (this.tablero.getCasilla(coordenada).isMina()) {
+			 respuesta= new RespuestaColocacion(true, "M");
+		}
+		return respuesta;
 	}
 }
