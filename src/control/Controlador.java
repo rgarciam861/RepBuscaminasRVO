@@ -25,10 +25,7 @@ public class Controlador {
 		return this.gestion.realizarJugada(coordenada);
 	}
 	
-
 	public RespuestaColocacion isMina(Coordenada coordenada) {
 		return this.gestion.isMina(coordenada);
 	}
-
-
 }
