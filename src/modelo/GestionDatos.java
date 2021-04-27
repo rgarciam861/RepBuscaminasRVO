@@ -37,18 +37,37 @@ public class GestionDatos {
 
 	
 	
+//	public ArrayList<RespuestaColocacion> realizarJugada(Coordenada coordenada) {
+//		ArrayList<RespuestaColocacion> arrayRespuestas= new ArrayList<>();
+//		
+//		int minasAlrededor = this.tablero.getCasilla(coordenada).getMinasAlrededor();
+//		
+//		if(this.tablero.getCasilla(coordenada).isMina()) {
+//			arrayRespuestas.add(new RespuestaColocacion(true,"M", coordenada));
+//		} else {
+//			ArrayList<RespuestaColocacion> arrayRespuestasDesveladas = this.tablero.desvelarCasillas(coordenada);
+//			for (RespuestaColocacion respuestaColocacion : arrayRespuestasDesveladas) {
+//				arrayRespuestas.add(respuestaColocacion);
+//			}
+//			arrayRespuestas.add(new RespuestaColocacion(true, String.valueOf(minasAlrededor), coordenada));
+//		}
+//		
+//		return arrayRespuestas;
+//	}
+	
 	public ArrayList<RespuestaColocacion> realizarJugada(Coordenada coordenada) {
 		ArrayList<RespuestaColocacion> arrayRespuestas= new ArrayList<>();
+		ArrayList<Coordenada> arrayDesveladasCoordenada;
 		
 		int minasAlrededor = this.tablero.getCasilla(coordenada).getMinasAlrededor();
 		
 		if(this.tablero.getCasilla(coordenada).isMina()) {
 			arrayRespuestas.add(new RespuestaColocacion(true,"M", coordenada));
 		} else {
-			ArrayList<RespuestaColocacion> arrayRespuestasDesveladas = this.tablero.desvelarCasillas(coordenada);
-			for (RespuestaColocacion respuestaColocacion : arrayRespuestasDesveladas) {
-				arrayRespuestas.add(respuestaColocacion);
-			}
+			this.tablero.desvelarCasillas(coordenada);
+			arrayDesveladasCoordenada = this.tablero.getCasillasDesveladasCoordenadaL(coordenada);
+			
+			
 			arrayRespuestas.add(new RespuestaColocacion(true, String.valueOf(minasAlrededor), coordenada));
 		}
 		

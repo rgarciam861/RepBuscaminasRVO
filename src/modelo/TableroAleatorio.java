@@ -8,6 +8,7 @@ import utiles.Utiles;
 public class TableroAleatorio extends Tablero {
 
 	private final int casillasAlrededor = 8;
+	private boolean terminado = false;
 
 	// Constructor aleatorio
 	public TableroAleatorio(int lado, int minas) {
@@ -52,6 +53,8 @@ public class TableroAleatorio extends Tablero {
 
 		}
 	}
+	
+	
 
 	private boolean isIntoLimits(int xAuxiliar, int yAuxiliar) {
 		return xAuxiliar >= 0 && yAuxiliar >= 0 && xAuxiliar < getAlto() && yAuxiliar < getAncho();
@@ -99,38 +102,105 @@ public class TableroAleatorio extends Tablero {
 	}
 	
 	
-
-	public ArrayList<RespuestaColocacion> desvelarCasillas(Coordenada coordenada) {
-		ArrayList<RespuestaColocacion> arrayRespuestasDesveladas= new ArrayList<>();
-		
-		if (getCasilla(coordenada).isVelada()) {
-			getCasilla(coordenada).setVelada(false);
-
-			if (!getCasilla(coordenada).isMina() && getCasilla(coordenada).getMinasAlrededor() == 0) {
-				for (int i = 0; i < casillasAlrededor; i++) {
-					int[] posicion = Utiles.damePosicionAlrededor(i);
-					int xAuxiliar = coordenada.getPosX() + posicion[0];
-					int yAuxiliar = coordenada.getPosY() + posicion[1];
-					if (isIntoLimits(xAuxiliar, yAuxiliar)) {
-						
-						Coordenada coord =new Coordenada(xAuxiliar, yAuxiliar);
-						
-						if(getCasilla(coord).isVelada()) {
-							getCasilla(coord).setVelada(false);
-							int minasAlrededor= getCasilla(coord).getMinasAlrededor();
-							arrayRespuestasDesveladas.add(new RespuestaColocacion(true, String.valueOf(minasAlrededor), coord));
-						}
-						
-					}
-
-				}
-
+	public boolean[][] getCasillasDesveladas(){
+		boolean resultados[][] = new boolean[getAlto()][getAncho()];
+		for (int i = 0; i < resultados.length; i++) {
+			for (int j = 0; j < resultados[i].length; j++) {
+			resultados[i][j]= getCasilla(new Coordenada(i,j)).isVelada();
 			}
 		}
-		return arrayRespuestasDesveladas;
-
+		return resultados;
 	}
 	
+	public Coordenada[][] getCasillasDesveladasCoordenada(Coordenada coordenada){
+		
+		Coordenada resultados[][] = new Coordenada[getAlto()][getAncho()];
+		for (int i = 0; i < resultados.length; i++) {
+			for (int j = 0; j < resultados[i].length; j++) {
+			resultados[i][j]= new Coordenada(i,j);
+			}
+		}
+		return resultados;
+	}
+	
+	public ArrayList<Coordenada> getCasillasDesveladasCoordenadaL(Coordenada coordenada){
+		
+		ArrayList<Coordenada> resultados = new ArrayList<Coordenada>();
+		for (Coordenada coordenada2 : resultados) {
+			resultados.add(coordenada2);
+		}
+		return resultados;
+	}
+	
+	
+	public void desvelarCasillas(Coordenada lugar) {
+		if (getCasilla(lugar).isVelada()&&!getCasilla(lugar).isMarcada()) {
+			getCasilla(lugar).setVelada(false);
+			if (getCasilla(lugar).isMina()) {
+				this.terminado = true;
+			} else {
+				if (getCasilla(lugar).getMinasAlrededor() == 0) {
+					// proceso recursivo
+					recursivoDesvelarCasillas(lugar);
+				}
+			}
+		}else {
+			//si alrededor tiene tantas casillas marcadas como minas alrededor tiene la propia casilla
+			//si el caso anterior es negativo NADA QUE HACER
+			//si es positivo
+			//repito el proceso de arriba
+			if(getCasilla(lugar).getMinasAlrededor() == getCasilla(lugar).getMarcadasAlrededor()) {
+				recursivoDesvelarCasillas(lugar);
+				
+			}
+		}
+	}
+
+	private void recursivoDesvelarCasillas(Coordenada lugar) {
+		int alrededor = 8;
+		for (int i = 0; i < alrededor; i++) {
+			int[] coordenada = Utiles.damePosicionAlrededor(i);
+			int posX = lugar.getPosX() + coordenada[0];
+			int posY = lugar.getPosY() + coordenada[1];
+			Coordenada lugarRelativo = new Coordenada(posX,posY);
+			
+			if (lugarRelativo.isInToLimits(getAncho(),getAlto())) {
+				desvelarCasillas(lugarRelativo);
+			}
+		}
+	}
+	
+	
+//	public ArrayList<RespuestaColocacion> desvelarCasillas(Coordenada coordenada) {
+//	ArrayList<RespuestaColocacion> arrayRespuestasDesveladas= new ArrayList<>();
+//	
+//	if (getCasilla(coordenada).isVelada()) {
+//		getCasilla(coordenada).setVelada(false);
+//
+//		if (!getCasilla(coordenada).isMina() && getCasilla(coordenada).getMinasAlrededor() == 0) {
+//			for (int i = 0; i < casillasAlrededor; i++) {
+//				int[] posicion = Utiles.damePosicionAlrededor(i);
+//				int xAuxiliar = coordenada.getPosX() + posicion[0];
+//				int yAuxiliar = coordenada.getPosY() + posicion[1];
+//				if (isIntoLimits(xAuxiliar, yAuxiliar)) {
+//					
+//					Coordenada coord =new Coordenada(xAuxiliar, yAuxiliar);
+//					
+//					if(getCasilla(coord).isVelada()) {
+//						getCasilla(coord).setVelada(false);
+//						int minasAlrededor= getCasilla(coord).getMinasAlrededor();
+//						arrayRespuestasDesveladas.add(new RespuestaColocacion(true, String.valueOf(minasAlrededor), coord));
+//					}
+//					
+//				}
+//
+//			}
+//
+//		}
+//	}
+//	return arrayRespuestasDesveladas;
+//
+//}
 	
 
 }

@@ -1,15 +1,42 @@
 package modelo;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.ArrayList;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class TableroAleatorioTest {
+import jdk.nashorn.internal.ir.annotations.Ignore;
 
+class TableroAleatorioTest {
+	
+	ArrayList<Coordenada> posiciones = null;
+	TableroAleatorio tableroAleatorio;
+	
+	@BeforeEach
+	void before() {
+		posiciones = new ArrayList<Coordenada>();
+		posiciones.add(new Coordenada(0, 0));
+		posiciones.add(new Coordenada(1, 2));
+		posiciones.add(new Coordenada(2, 2));
+		tableroAleatorio = new TableroAleatorio(4, posiciones);
+	}
+
+	
 	@Test
+	void testDesvelarCasillas() {
+		Coordenada desvelada = new Coordenada(3, 0);
+		boolean tablero[][] = { { true, true, true, true }, { false, false, true, true }, { false, false, true, true },
+				{ false, false, true, true } };
+		tableroAleatorio.desvelarCasillas(desvelada);
+		assertArrayEquals(tablero, tableroAleatorio.getCasillasDesveladas());
+	}
+	
+	
+	@Ignore
 	void testTableroAleatorioContarMinasalrededor() {
 		// Tantas como minas
 		ArrayList<Coordenada> posiciones = null;
@@ -30,7 +57,7 @@ class TableroAleatorioTest {
 
 	}
 
-	@Test
+	@Ignore
 	void testTableroAleatorio() {
 		Dificultad dificultad = Dificultad.dificil;
 		int minas = 143;
