@@ -45,10 +45,8 @@ public class GestionDatos {
 		if(this.tablero.getCasilla(coordenada).isMina()) {
 			arrayRespuestas.add(new RespuestaColocacion(true,"M", coordenada));
 		} else {
-			ArrayList<RespuestaColocacion> arrayRespuestasDesveladas = this.tablero.desvelarCasillas(coordenada);
-			for (RespuestaColocacion respuestaColocacion : arrayRespuestasDesveladas) {
-				arrayRespuestas.add(respuestaColocacion);
-			}
+			this.tablero.desvelarCasillas(coordenada);
+			
 			arrayRespuestas.add(new RespuestaColocacion(true, String.valueOf(minasAlrededor), coordenada));
 		}
 		
