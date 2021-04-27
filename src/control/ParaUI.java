@@ -1,6 +1,8 @@
 package control;
 
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 //github.com/vcanor01/RepBuscaminasRVO.git
@@ -10,6 +12,8 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 
 import modelo.Coordenada;
+import modelo.Densidad;
+import modelo.Dificultad;
 import utiles.RespuestaColocacion;
 import vista.UI;
 
@@ -22,14 +26,29 @@ public class ParaUI extends UI {
 	public ParaUI() {
 		super();
 		controlador = new Controlador();
-		this.jugar = true;
+		this.jugar=true;
 
 		// leyes de demeter
 		// para solucionar esto es crear metodos delegados
 //		jPanelOpciones.btnIniciar.addActionListener(l);
+		getBtnIniciar().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
 
+				Densidad densidad = (Densidad) getCmbDensidad().getSelectedItem();
+				
+				Dificultad dificultad = (Dificultad) getCmbDificultad().getSelectedItem();
+				
+				controlador.crearTablero(densidad, dificultad);
+				addBotonera(dificultad.getLongitud());
+				asociarBotones();
+			}
+		});
+		// leyes de demeter
+		// para solucionar esto es crear metodos delegados
+//		jPanelOpciones.btnIniciar.addActionListener(l);
 	}
-
 	private void asociarBotones() {
 		for (int i = 0; i < this.botonera.getAlto(); i++) {
 			for (int j = 0; j < this.botonera.getAncho(); j++) {
@@ -54,18 +73,15 @@ public class ParaUI extends UI {
 							}
 						}
 						if (e.getButton() == 3) {
-							System.out.println("boton derecho");
 							JButton boton = (JButton) e.getSource();
 							Coordenada coordenada2 = botonera.getCoordenada(boton);
-
+							boton.setText(controlador.isMarcada(coordenada2).getMensaje());
 						}
 					}
 				});
-
 			}
 		}
 	}
-
 	private void realizarJugada(Coordenada coordenada) {
 		ArrayList<RespuestaColocacion> arrayRespuestasColocacion = controlador.realizarJugada(coordenada);
 		for (RespuestaColocacion respuestaColocacion : arrayRespuestasColocacion) {

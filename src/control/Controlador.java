@@ -28,4 +28,8 @@ public class Controlador {
 	public RespuestaColocacion isMina(Coordenada coordenada) {
 		return this.gestion.isMina(coordenada);
 	}
+	
+	public RespuestaColocacion isMarcada(Coordenada coordenada) {
+		return this.gestion.isMarcada(coordenada);
+	}
 }
