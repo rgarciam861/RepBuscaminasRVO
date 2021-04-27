@@ -53,9 +53,5 @@ public class Coordenada {
 			return false;
 		return true;
 	}
-	
-	public boolean isInToLimits(int ancho, int alto) {
-		return posX >= 0 && posY >= 0 && posX < alto && posY < ancho;
-	}
 
 }

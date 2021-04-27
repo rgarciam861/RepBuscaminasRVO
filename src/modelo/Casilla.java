@@ -6,7 +6,6 @@ public class Casilla {
 	private boolean velada = true;
 	private boolean marcada = false;
 	private int minasAlrededor = 0;
-	private int marcadasAlrededor =0;
 
 	public Casilla() {
 
@@ -35,17 +34,9 @@ public class Casilla {
 	public void setMarcada(boolean marcada) {
 		this.marcada = marcada;
 	}
-	
-	public int getMarcadasAlrededor() {
-		return marcadasAlrededor;
-	}
-	
+
 	public int getMinasAlrededor() {
 		return minasAlrededor;
-	}
-	
-	public void setMarcadasAlrededor(int marcadasAlrededor) {
-		this.marcadasAlrededor= marcadasAlrededor;
 	}
 
 	public void setMinasAlrededor(int minasAlrededor) {

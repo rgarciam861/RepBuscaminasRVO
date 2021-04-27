@@ -2,8 +2,6 @@ package control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -38,6 +36,9 @@ public class ParaUI extends UI {
 				controlador.crearTablero(densidad, dificultad);
 				addBotonera(dificultad.getLongitud());
 				asociarBotones();
+				
+				
+//				
 			}
 		});
 	}
@@ -46,31 +47,23 @@ public class ParaUI extends UI {
 		for (int i = 0; i < this.botonera.getAlto(); i++) {
 			for (int j = 0; j < this.botonera.getAncho(); j++) {
 				Coordenada coordenada = new Coordenada(i, j);
-				botonera.getButton(coordenada).addMouseListener(new MouseAdapter() {
+				botonera.getButton(coordenada).addActionListener(new ActionListener() {
 					@Override
-					public void mouseClicked(MouseEvent e) {
+					public void actionPerformed(ActionEvent e) {
 						// lo primero es llamar a control para que cambie el estado del tablero
-
-						super.mouseClicked(e);
-						if(e.getButton()==1) {
-//							System.out.println("boton izquierdo");
-							if(jugar) {
-								JButton boton = (JButton) e.getSource();
-								Coordenada coordenada2 = botonera.getCoordenada(boton);
-								realizarJugada(coordenada2);
-								
-								if (controlador.isMina(coordenada2).isRespuesta()) {
-									boton.setText(controlador.isMina(coordenada2).getMensaje());
-									jugar=false;
-								}
-							}
-						}
-						if(e.getButton()==3) {
-							System.out.println("boton derecho");
-							JButton boton = (JButton) e.getSource();
-							Coordenada coordenada2 = botonera.getCoordenada(boton);
+						
+						if(jugar) {
+						JButton boton = (JButton) e.getSource();
+						Coordenada coordenada2 = botonera.getCoordenada(boton);
+						realizarJugada(coordenada2);
+						
+						if (controlador.isMina(coordenada2).isRespuesta()) {
+							boton.setText(controlador.isMina(coordenada2).getMensaje());
+							jugar=false;
 							
 						}
+						
+					}
 					}
 				});
 				
@@ -80,9 +73,14 @@ public class ParaUI extends UI {
 	
 	private void realizarJugada(Coordenada coordenada) {
 		ArrayList<RespuestaColocacion> arrayRespuestasColocacion = controlador.realizarJugada(coordenada);
+		
 		for (RespuestaColocacion respuestaColocacion : arrayRespuestasColocacion) {
 			botonera.getButton(respuestaColocacion.getCoordenada()).setText(respuestaColocacion.getMensaje());
 		}
+		
+		
+			
+		
 ;		
 	};
 
