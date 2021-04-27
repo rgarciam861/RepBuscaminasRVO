@@ -1,6 +1,9 @@
 package modelo;
 
+import java.util.ArrayList;
+
 import utiles.RespuestaColocacion;
+import utiles.Utiles;
 
 public class GestionDatos {
 	private TableroAleatorio tablero;
@@ -24,15 +27,26 @@ public class GestionDatos {
 		return resultado;
 
 	}
+	
 
 	
 	
-	public RespuestaColocacion realizarJugada(Coordenada coordenada) {
-		RespuestaColocacion respuesta= new RespuestaColocacion();
-		
+	public ArrayList<RespuestaColocacion> realizarJugada(Coordenada coordenada) {
+		ArrayList<RespuestaColocacion> arrayRespuestas= new ArrayList<>();
 		
 		int minasAlrededor = this.tablero.getCasilla(coordenada).getMinasAlrededor();
-		return respuesta = new RespuestaColocacion(true, String.valueOf(minasAlrededor));
+		
+		if(this.tablero.getCasilla(coordenada).isMina()) {
+			arrayRespuestas.add(new RespuestaColocacion(true,"M", coordenada));
+		} else {
+			ArrayList<RespuestaColocacion> arrayRespuestasDesveladas = this.tablero.desvelarCasillas(coordenada);
+			for (RespuestaColocacion respuestaColocacion : arrayRespuestasDesveladas) {
+				arrayRespuestas.add(respuestaColocacion);
+			}
+			arrayRespuestas.add(new RespuestaColocacion(true, String.valueOf(minasAlrededor), coordenada));
+		}
+		
+		return arrayRespuestas;
 	}
 
 	public RespuestaColocacion isMina(Coordenada coordenada) {
